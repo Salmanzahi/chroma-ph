@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CameraIcon, CloseIcon, MenuIcon } from "@/src/components/icons";
+import { ArrowRightIcon, CameraIcon, CloseIcon, MenuIcon } from "@/src/components/icons";
 import { cn } from "@/src/lib/cn";
 import { ROUTES } from "@/src/lib/constants";
 import { SHARED } from "@/src/data/placeholder-content";
@@ -44,7 +44,16 @@ export function Header() {
       </div>
       {open && <nav id="mobile-navigation" className="mobile-navigation" aria-label="Navigasi mobile">
         <div className="page-shell">
-          {[...links, { href: ROUTES.scan, label: SHARED.navScan, index: "03" }].map((link) => <Link key={link.href} href={link.href} onClick={close} className={cn("mobile-nav-link", pathname === link.href && "is-active")}><span>{link.index}</span>{link.label}</Link>)}
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} onClick={close} className={cn("mobile-nav-link", pathname === link.href && "is-active")}>
+              <span>{link.index}</span>{link.label}
+              <ArrowRightIcon size={15} className="mobile-nav-arrow" />
+            </Link>
+          ))}
+          <Link href={ROUTES.scan} onClick={close} className={cn("mobile-nav-link", pathname === ROUTES.scan && "is-active")} style={{ fontWeight: 700 }}>
+            <span>03</span><CameraIcon size={16} /> {SHARED.navScan}
+            <ArrowRightIcon size={15} className="mobile-nav-arrow" />
+          </Link>
         </div>
       </nav>}
     </header>
