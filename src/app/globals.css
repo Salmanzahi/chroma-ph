@@ -371,6 +371,7 @@ img, video { display: block; max-width: 100%; outline: 1px solid oklch(0 0 0 / .
   .hero-actions .button-primary { width: 100%; }
   .specimen-field__plane { min-height: 18rem; }
   .boundary-strip__grid, .indexed-section__head, .reference-readout, .scanner-heading, .result-detail, .about-story, .identity-register { grid-template-columns: 1fr; gap: 1rem; }
+  .boundary-strip::after { display: none; }
   .feedback-state { grid-template-columns: auto 1fr; }
   .feedback-state__index { grid-column: 1 / -1; }
   .feedback-state > :last-child { grid-column: 2; justify-self: start; }
