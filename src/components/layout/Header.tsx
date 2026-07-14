@@ -46,12 +46,16 @@ export function Header() {
         <div className="page-shell">
           {links.map((link) => (
             <Link key={link.href} href={link.href} onClick={close} className={cn("mobile-nav-link", pathname === link.href && "is-active")}>
-              <span>{link.index}</span>{link.label}
+              <span>{link.index}</span>
+              <span>{link.label}</span>
               <ArrowRightIcon size={15} className="mobile-nav-arrow" />
             </Link>
           ))}
           <Link href={ROUTES.scan} onClick={close} className={cn("mobile-nav-link", pathname === ROUTES.scan && "is-active")} style={{ fontWeight: 700 }}>
-            <span>03</span><CameraIcon size={16} /> {SHARED.navScan}
+            <span>03</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+              <CameraIcon size={16} />{SHARED.navScan}
+            </span>
             <ArrowRightIcon size={15} className="mobile-nav-arrow" />
           </Link>
         </div>
