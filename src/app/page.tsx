@@ -103,7 +103,6 @@ export default function HomePage() {
           <div className="privacy-flow__step"><span>02</span><strong>Canvas lokal</strong><p>Membaca piksel pada bidang sampel.</p></div>
           <div className="privacy-flow__step"><span>03</span><strong>Hasil sementara</strong><p>Tersedia hanya pada tab yang sama.</p></div>
         </div>
-        <div className="privacy-boundary"><span aria-hidden="true">×</span><strong>Tidak melewati batas perangkat</strong><p>Tanpa unggahan gambar, akun, basis data, atau penyimpanan cloud.</p></div>
       </section>
 
       <section className="closing-line page-shell lazy-section">
