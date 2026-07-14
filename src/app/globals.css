@@ -154,9 +154,9 @@ img, video { display: block; max-width: 100%; outline: 1px solid oklch(0 0 0 / .
 .specimen-field__axis { position: absolute; background: oklch(1 0 0 / .7); }
 .specimen-field__axis--x { left: 47%; top: 50%; width: 6%; height: 1px; }
 .specimen-field__axis--y { left: 50%; top: 47%; width: 1px; height: 6%; }
-.boundary-strip { position: relative; overflow: hidden; border-block: var(--hairline); background: var(--aubergine); color: var(--paper); }
+.boundary-strip { position: relative; overflow: hidden; margin-top: clamp(3rem, 7vw, 7rem); border-block: var(--hairline); background: var(--aubergine); color: var(--paper); }
 .boundary-strip::after { content: "CAUTION / RESEARCH ONLY"; position: absolute; top: 50%; right: -2rem; transform: translateY(-50%) rotate(90deg); font-family: var(--mono); font-size: 0.6rem; opacity: 0.3; letter-spacing: 0.2em; white-space: nowrap; }
-.boundary-strip__grid { display: grid; grid-template-columns: .35fr 1.65fr; gap: 2rem; padding-block: 1.8rem; }
+.boundary-strip__grid { display: grid; grid-template-columns: .35fr 1.65fr; gap: 2rem; padding-block: clamp(2.5rem, 5vw, 4rem); }
 .boundary-strip .section-index { color: var(--color-accent-200); }
 .boundary-strip h2 { display: flex; align-items: center; gap: .6rem; margin: 0; font-size: 1rem; font-weight: 700; }
 .boundary-strip p:last-child { max-width: 68ch; margin: .55rem 0 0; color: oklch(.82 .018 84); }
