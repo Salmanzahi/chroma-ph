@@ -1,33 +1,37 @@
 /**
- * Placeholder content for unknown / unconfirmed client data.
- * Every value uses explicit Indonesian placeholder text.
- * Do NOT invent research claims, branding, team names, or institution names.
+ * Content for the Bioplastic Anthocyanin pH Scanner.
+ * All values sourced from ARGON UNAIR research context.
+ * See docs/RESEARCH_CONTEXT.md for the full research summary.
  */
 
 export const PLACEHOLDER = {
-  projectName: "Ini tempat nama project",
-  logo: "Ini tempat logo",
-  tagline: "Ini tempat tagline",
-  mainTitle: "Ini tempat judul utama",
-  description: "Ini tempat deskripsi",
-  image: "Ini tempat gambar",
-  teamName: "Ini tempat nama tim",
-  organization: "Ini tempat organisasi",
-  institution: "Ini tempat institusi",
+  projectName: "Bioplastic Anthocyanin pH Scanner",
+  logo: "ARGON UNAIR",
+  tagline: "Small Tech, Big Impact",
+  mainTitle: "Pemindai pH Berbasis Antosianin",
+  description:
+    "Alat berbasis browser untuk memperkirakan pH dari warna film indikator bioplastik antosianin bunga telang (Clitoria ternatea).",
+  image: "Film indikator bioplastik antosianin",
+  teamName: "ARGON (Airlangga Student Research Group of Nanotechnology)",
+  organization: "ARGON UNAIR",
+  institution: "Universitas Airlangga, Surabaya, Jawa Timur",
 } as const;
 
 export const LANDING = {
-  heroTitle: "Ini tempat judul utama",
+  heroTitle: "Pemindai pH Berbasis Antosianin",
   heroDescription:
-    "Ini tempat deskripsi: alat berbasis browser untuk memperkirakan pH dari warna film indikator bioplastik antosianin bunga telang.",
+    "Alat berbasis browser untuk memperkirakan pH dari warna film indikator bioplastik antosianin bunga telang (Clitoria ternatea).",
   primaryCta: "Mulai Pindai",
   secondaryCta: "Lihat Skala pH",
-  featureTitle1: "Ini tempat fitur 1",
-  featureDesc1: "Ini tempat deskripsi fitur 1",
-  featureTitle2: "Ini tempat fitur 2",
-  featureDesc2: "Ini tempat deskripsi fitur 2",
-  featureTitle3: "Ini tempat fitur 3",
-  featureDesc3: "Ini tempat deskripsi fitur 3",
+  featureTitle1: "Pemindaian Warna Real-time",
+  featureDesc1:
+    "Arahkan kamera ke film indikator bioplastik dan dapatkan estimasi pH langsung di peramban.",
+  featureTitle2: "Analisis Lokal Tanpa Server",
+  featureDesc2:
+    "Semua pemrosesan warna berjalan di perangkat Anda. Foto tidak dikirim ke server manapun.",
+  featureTitle3: "Indikasi Kelayakan",
+  featureDesc3:
+    "Rentang pH 5,5–7 menunjukkan indikasi berdasarkan parameter penelitian ARGON UNAIR.",
   workflowStep1Title: "Arahkan Kamera",
   workflowStep1Desc:
     "Arahkan kamera ke film indikator bioplastik atau unggah foto dari galeri.",
@@ -37,34 +41,37 @@ export const LANDING = {
   workflowStep3Title: "Lihat Hasil",
   workflowStep3Desc:
     "Dapatkan perkiraan pH dan indikasi kelayakan berdasarkan parameter penelitian.",
-  researchTitle: "Ini tempat judul riset",
-  researchDesc: "Ini tempat deskripsi riset",
+  researchTitle: "Sintesis Bioplastik Antosianin Bunga Telang",
+  researchDesc:
+    "Film bioplastik dari pati jagung dan nanoselulosa alga dengan plasticizer gliserol-sorbitol, diekstrak antosianin dari Clitoria ternatea sebagai indikator pH.",
   finalCta: "Mulai Pindai Sekarang",
 } as const;
 
 export const ABOUT = {
   backgroundTitle: "Latar Belakang",
   backgroundDesc:
-    "Ini tempat deskripsi latar belakang proyek: pengembangan alat pemindai pH berbasis antosianin dari bunga telang untuk aplikasi bioplastik.",
+    "Proyek ini mengembangkan alat pemindai pH berbasis antosianin dari bunga telang (Clitoria ternatea) untuk aplikasi bioplastik. ARGON UNAIR melakukan riset sintesis bioplastik dari pati jagung dan nanoselulosa alga dengan tambahan gliserol dan sorbitol sebagai plasticizer.",
   objectiveTitle: "Tujuan Riset",
   objectiveDesc:
-    "Ini tempat deskripsi tujuan riset.",
+    "Mengembangkan bioplastik indikator pH yang fungsional dan ramah lingkungan, serta menyediakan alat pemindai warna berbasis browser untuk estimasi pH.",
   materialTitle: "Material",
   materialDesc:
-    "Ini tempat deskripsi material: film bioplastik indikator pH berbasis antosianin bunga telang (Clitoria ternatea).",
+    "Film bioplastik indikator pH berbasis antosianin bunga telang (Clitoria ternatea). Bahan utama: pati jagung, nanoselulosa dari alga, gliserol-sorbitol sebagai plasticizer, dan ekstrak antosianin.",
   processTitle: "Proses Umum",
   processDesc:
-    "Ini tempat deskripsi proses: tahapan umum pengembangan dan pengujian film indikator.",
+    "1) Sintesis nanoselulosa dari selulosa alga menggunakan asam sulfat dan sonikasi. 2) Ekstraksi antosianin dari bunga telang menggunakan etanol. 3) Fabrikasi bioplastik dengan menggabungkan nanoselulosa, pati jagung, plasticizer, dan ekstrak antosianin, kemudian dicetak dan dikeringkan.",
   teamTitle: "Tim",
-  teamDesc: "Ini tempat nama tim",
+  teamDesc: "ARGON (Airlangga Student Research Group of Nanotechnology)",
   orgTitle: "Organisasi",
-  orgDesc: "Ini tempat organisasi",
+  orgDesc:
+    "Komunitas riset di Universitas Airlangga yang berfokus pada pengembangan dan implementasi penelitian nanoteknologi.",
   institutionTitle: "Institusi",
-  institutionDesc: "Ini tempat institusi",
+  institutionDesc: "Universitas Airlangga (UNAIR), Surabaya, Jawa Timur",
   documentationTitle: "Dokumentasi",
-  documentationDesc: "Ini tempat dokumentasi",
+  documentationDesc:
+    "Dokumentasi riset tersedia di repositori ARGON UNAIR.",
   creditsTitle: "Kredit",
-  creditsDesc: "Ini tempat kredit",
+  creditsDesc: "ARGON UNAIR Research Group — Small Tech, Big Impact",
 } as const;
 
 export const PH_SCALE = {
@@ -95,7 +102,7 @@ export const RESULT = {
   cameraLimitation:
     "Hasil dipengaruhi oleh kamera, pencahayaan, dan kualitas gambar. Gunakan pencahayaan yang cukup dan merata untuk hasil terbaik.",
   researchDisclaimer:
-    "Indikasi kelayakan berdasarkan parameter penelitian. Estimasi pH tidak menjamin keamanan pangan secara mandiri.",
+    "Indikasi kelayakan berdasarkan parameter penelitian ARGON UNAIR. Estimasi pH tidak menjamin keamanan pangan secara mandiri.",
   scanAnother: "Pindai Lagi",
   backToHome: "Kembali ke Beranda",
 } as const;
@@ -107,9 +114,9 @@ export const NOT_FOUND = {
 } as const;
 
 export const SHARED = {
-  siteTitle: "Bioplastic | Indikator pH Antosianin",
+  siteTitle: "Bioplastic | Indikator pH Antosianin — ARGON UNAIR",
   siteDescription:
-    "Alat pemindai pH berbasis browser untuk film indikator bioplastik antosianin bunga telang.",
+    "Alat pemindai pH berbasis browser untuk film indikator bioplastik antosianin bunga telang (Clitoria ternatea). Dikembangkan oleh ARGON UNAIR.",
   navScan: "Pindai",
   navPhScale: "Skala pH",
   navAbout: "Tentang",
