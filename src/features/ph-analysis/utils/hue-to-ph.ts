@@ -3,7 +3,11 @@
  * Preserved from the legacy implementation (index.html:540–558).
  *
  * Key behaviors:
- * - Red-wrap: hue < 30 → add 360 to make reds continuous with the high-hue acid range.
+ * - Near-achromatic guard: saturation < 0.04 → return NEUTRAL_PH immediately.
+ *   This prevents false acidic readings from gray/black pixels (hue defaults
+ *   to 0 = red in HSL conversion, which would otherwise map to pH ~1).
+ * - Red-wrap: hue < 30 → add 360 to make reds continuous with the high-hue
+ *   acid range.
  * - Descending scan: REF is ordered high-hue → low-hue (362 → 40).
  * - Desaturation penalty: if sat < threshold, pH is pulled toward neutral (7).
  * - Clamping: hue is clamped to REF bounds [40, 362].
@@ -29,6 +33,13 @@ export function hueToPh(
   const desatThreshold =
     options?.desaturationThreshold ?? DEFAULT_DESATURATION_THRESHOLD;
   const desatPull = options?.desaturationPull ?? DEFAULT_DESATURATION_PULL;
+
+  // Guard: near-achromatic samples have unreliable hue.
+  // Returning neutral avoids misidentifying gray pixels as strongly acidic.
+  const MIN_MEANINGFUL_SATURATION = 0.04;
+  if (saturation < MIN_MEANINGFUL_SATURATION) {
+    return NEUTRAL_PH;
+  }
 
   let h = hue;
 

@@ -20,7 +20,6 @@ export interface UseImageUploadReturn {
   file: File | null;
   previewUrl: string | null;
   error: string | null;
-  isLoading: boolean;
   handleFile: (file: File) => void;
   clearFile: () => void;
   replaceFile: (file: File) => void;

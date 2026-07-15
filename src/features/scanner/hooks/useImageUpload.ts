@@ -13,7 +13,6 @@ export function useImageUpload(): UseImageUploadReturn {
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const currentUrlRef = useRef<string | null>(null);
 
   const revokeCurrentUrl = useCallback(() => {
@@ -45,14 +44,12 @@ export function useImageUpload(): UseImageUploadReturn {
         return;
       }
 
-      setIsLoading(true);
       revokeCurrentUrl();
 
       const url = URL.createObjectURL(newFile);
       currentUrlRef.current = url;
       setFile(newFile);
       setPreviewUrl(url);
-      setIsLoading(false);
     },
     [revokeCurrentUrl]
   );
@@ -62,7 +59,6 @@ export function useImageUpload(): UseImageUploadReturn {
     setFile(null);
     setPreviewUrl(null);
     setError(null);
-    setIsLoading(false);
   }, [revokeCurrentUrl]);
 
   const replaceFile = useCallback(
@@ -81,7 +77,6 @@ export function useImageUpload(): UseImageUploadReturn {
     file,
     previewUrl,
     error,
-    isLoading,
     handleFile,
     clearFile,
     replaceFile,

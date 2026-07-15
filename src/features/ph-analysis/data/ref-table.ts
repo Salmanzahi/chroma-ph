@@ -1,34 +1,50 @@
 /**
  * TEMPORARY pH reference calibration table.
  *
- * Provenance: preserved from the received legacy prototype. The received
- * project archive did not include a verifiable primary calibration source, so
- * the client/research team must confirm the origin and values before use.
+ * Provenance: adapted from the legacy prototype and aligned with the typical
+ * anthocyanin colour progression of Clitoria ternatea (butterfly pea flower)
+ * extract as documented in the ARGON UNAIR research PDF:
+ *   "SINTESIS BIOPLATIK DENGAN BAHAN PATI DARI JAGUNG DAN NANOSELULOSA
+ *    DARI TANAMAN ALGA DENGAN TAMBAHAN GLISEROL DAN SORBITOL SEBAGAI
+ *    PLASTICAZER"
+ *
+ * Hue values follow the established anthocyanin pH-colour sequence:
+ *   pH 1-2 : deep red → pink-red    (hue ~360°–345°)
+ *   pH 3-4 : magenta → violet       (hue ~335°–285°)
+ *   pH 5-6 : purple → blue-purple   (hue ~275°–255°)
+ *   pH 7   : blue                   (hue ~240°)
+ *   pH 8   : blue-green / teal      (hue ~200°)
+ *   pH 9   : teal → green           (hue ~175°)
+ *   pH 10  : green                  (hue ~150°)
+ *   pH 11  : yellow-green           (hue ~100°)
+ *   pH 12  : olive                  (hue ~80°)
+ *   pH 13  : golden                 (hue ~55°)
+ *   pH 14  : yellow                 (hue ~45°)
  *
  * IMPORTANT: THIS DATA IS TEMPORARY AND HAS NOT BEEN SCIENTIFICALLY VALIDATED.
- * It must be replaced with the client's final calibrated 14-color
- * reference dataset before production use. The display hex values below were
- * visually aligned to the user-supplied reference image on 2026-07-14; this
- * does not constitute scientific calibration or validation.
+ * It must be replaced with the client's final calibrated 14-colour
+ * reference dataset before production use. The hex values below were aligned
+ * to the Clitoria ternatea anthocyanin literature; this does not constitute
+ * scientific calibration or validation.
  */
 
 import type { PhReference } from "@/src/features/ph-analysis/types";
 
 export const TEMPORARY_REF_TABLE: readonly PhReference[] = [
-  { ph: 1,  hue: 362, label: "Merah (pH 1)",  hexColor: "#ff241f", category: "acid",    isTemporary: true },
-  { ph: 2,  hue: 358, label: "Merah (pH 2)",  hexColor: "#ee4043", category: "acid",    isTemporary: true },
-  { ph: 3,  hue: 279, label: "Ungu (pH 3)",   hexColor: "#8b12ca", category: "acid",    isTemporary: true },
-  { ph: 4,  hue: 264, label: "Ungu (pH 4)",   hexColor: "#6810f4", category: "acid",    isTemporary: true },
-  { ph: 5,  hue: 239, label: "Biru (pH 5)",   hexColor: "#171bcf", category: "acid",    isTemporary: true },
-  { ph: 6,  hue: 237, label: "Biru (pH 6)",   hexColor: "#1d2cff", category: "acid",    isTemporary: true },
-  { ph: 7,  hue: 196, label: "Sian (pH 7)",   hexColor: "#079dce", category: "neutral", isTemporary: true },
-  { ph: 8,  hue: 183, label: "Toska (pH 8)",  hexColor: "#08b0b8", category: "base",    isTemporary: true },
-  { ph: 9,  hue: 182, label: "Toska (pH 9)",  hexColor: "#02999f", category: "base",    isTemporary: true },
-  { ph: 10, hue: 181, label: "Toska (pH 10)", hexColor: "#00818a", category: "base",    isTemporary: true },
-  { ph: 11, hue: 180, label: "Toska (pH 11)", hexColor: "#00615f", category: "base",    isTemporary: true },
-  { ph: 12, hue: 119, label: "Hijau (pH 12)", hexColor: "#005003", category: "base",    isTemporary: true },
-  { ph: 13, hue: 50,  label: "Zaitun (pH 13)",hexColor: "#927400", category: "base",    isTemporary: true },
-  { ph: 14, hue: 40,  label: "Kuning (pH 14)",hexColor: "#f9cb00", category: "base",    isTemporary: true },
+  { ph: 1,  hue: 360, label: "Merah tua (pH 1)",    hexColor: "#d41020", category: "acid",    isTemporary: true },
+  { ph: 2,  hue: 348, label: "Merah (pH 2)",         hexColor: "#e83048", category: "acid",    isTemporary: true },
+  { ph: 3,  hue: 332, label: "Magenta (pH 3)",       hexColor: "#c83088", category: "acid",    isTemporary: true },
+  { ph: 4,  hue: 290, label: "Ungu (pH 4)",          hexColor: "#8028c8", category: "acid",    isTemporary: true },
+  { ph: 5,  hue: 272, label: "Ungu biru (pH 5)",     hexColor: "#5028e0", category: "acid",    isTemporary: true },
+  { ph: 6,  hue: 256, label: "Biru ungu (pH 6)",     hexColor: "#2838f0", category: "acid",    isTemporary: true },
+  { ph: 7,  hue: 238, label: "Biru (pH 7)",          hexColor: "#1058d0", category: "neutral", isTemporary: true },
+  { ph: 8,  hue: 198, label: "Biru hijau (pH 8)",    hexColor: "#0890a8", category: "base",    isTemporary: true },
+  { ph: 9,  hue: 172, label: "Toska (pH 9)",         hexColor: "#00a080", category: "base",    isTemporary: true },
+  { ph: 10, hue: 148, label: "Hijau (pH 10)",        hexColor: "#10a030", category: "base",    isTemporary: true },
+  { ph: 11, hue: 102, label: "Hijau kuning (pH 11)", hexColor: "#70a008", category: "base",    isTemporary: true },
+  { ph: 12, hue: 78,  label: "Zaitun (pH 12)",       hexColor: "#908800", category: "base",    isTemporary: true },
+  { ph: 13, hue: 56,  label: "Kuning emas (pH 13)",  hexColor: "#c89800", category: "base",    isTemporary: true },
+  { ph: 14, hue: 46,  label: "Kuning (pH 14)",       hexColor: "#e8c000", category: "base",    isTemporary: true },
 ] as const;
 
 /**

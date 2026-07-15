@@ -90,7 +90,21 @@ export default function ScanPage() {
   const handleCapture = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas) return;
+
+    if (!video) {
+      setError("Elemen kamera tidak tersedia. Muat ulang halaman.");
+      return;
+    }
+    if (!canvas) {
+      setError("Elemen kanvas tidak tersedia. Muat ulang halaman.");
+      return;
+    }
+
+    // Guard against capturing before the video has decoded its first frame.
+    if (video.readyState < 2 || video.videoWidth === 0) {
+      setError("Kamera belum siap. Tunggu beberapa saat lalu coba lagi.");
+      return;
+    }
 
     const ctx = drawVideoFrameToCanvas(video, canvas);
     if (!ctx) {
@@ -131,7 +145,10 @@ export default function ScanPage() {
     img.onload = () => {
       if (cancelled) return;
       const canvas = canvasRef.current;
-      if (!canvas) return;
+      if (!canvas) {
+        setError("Elemen kanvas tidak tersedia. Muat ulang halaman.");
+        return;
+      }
 
       const ctx = drawImageToCanvas(img, canvas);
       if (!ctx) {
@@ -173,7 +190,10 @@ export default function ScanPage() {
   // ── Confirm & Analyze ──────────────────────────────────────
   const handleConfirm = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      setError("Elemen kanvas tidak tersedia. Muat ulang halaman.");
+      return;
+    }
 
     setCaptureState("processing");
     setError(null);

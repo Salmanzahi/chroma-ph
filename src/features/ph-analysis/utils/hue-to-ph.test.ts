@@ -12,9 +12,11 @@ describe("hueToPh", () => {
     expect(ph).toBeCloseTo(14, 0);
   });
 
-  it("returns pH ~7 for hue 196 (cyan)", () => {
+  it("returns pH ~8 for hue 196 (blue-green / teal for Clitoria ternatea)", () => {
+    // With the updated anthocyanin ref-table, pH 7 is blue (hue 238),
+    // and blue-green (hue 196) falls near pH 8.
     const ph = hueToPh(196, 0.5);
-    expect(ph).toBeCloseTo(7, 0);
+    expect(ph).toBeCloseTo(8, 0);
   });
 
   it("handles red-wrap: low hue values are treated as high-hue range", () => {
