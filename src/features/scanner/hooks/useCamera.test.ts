@@ -16,6 +16,11 @@ describe("useCamera and Camera Support", () => {
 
   beforeEach(() => {
     vi.restoreAllMocks();
+    Object.defineProperty(window, "isSecureContext", {
+      value: true,
+      writable: true,
+      configurable: true,
+    });
   });
 
   afterEach(() => {
