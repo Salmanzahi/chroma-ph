@@ -421,8 +421,10 @@ export default function ScanPage() {
       {captureState === "live" &&
         mode === "camera" &&
         cameraSupport === "supported" &&
-        camera.status !== "permission-denied" &&
-        camera.status !== "not-supported" && (
+        (camera.status === "idle" ||
+          camera.status === "requesting" ||
+          camera.status === "active" ||
+          camera.status === "stopped") && (
           <div className="flex flex-col items-center gap-4">
             {camera.status === "active" ? (
               /* Capture button */

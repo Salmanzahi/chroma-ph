@@ -413,15 +413,55 @@ export function useCamera(): UseCameraReturn {
 
   useEffect(() => {
     mountedRef.current = true;
-    void checkSupport();
+    let isCancelled = false;
+
+    checkCameraSupport(DEFAULT_SUPPORT_TIMEOUT_MS)
+      .then((result) => {
+        if (!mountedRef.current || isCancelled) return;
+
+        setSupportStatus(result.status);
+        if (result.status === "unsupported") {
+          setStatus("not-supported");
+          if (result.errorMessage) setErrorMessage(result.errorMessage);
+        } else if (result.status === "denied") {
+          setStatus("permission-denied");
+          if (result.errorMessage) setErrorMessage(result.errorMessage);
+        } else if (result.status === "supported") {
+          setStatus((prev) =>
+            prev === "not-supported" || prev === "permission-denied"
+              ? "idle"
+              : prev
+          );
+          setErrorMessage((prev) =>
+            prev?.includes("tidak mendukung") || prev?.includes("ditolak")
+              ? null
+              : prev
+          );
+        }
+      })
+      .catch(() => {
+        if (!mountedRef.current || isCancelled) return;
+        const fallbackSupported = isMediaDevicesSupported();
+        const nextStatus: CameraSupportStatus = fallbackSupported
+          ? "supported"
+          : "unsupported";
+        setSupportStatus(nextStatus);
+        if (!fallbackSupported) {
+          setStatus("not-supported");
+          setErrorMessage(
+            "Browser Anda tidak mendukung akses kamera. Gunakan browser modern atau unggah foto dari galeri."
+          );
+        }
+      });
 
     return () => {
+      isCancelled = true;
       mountedRef.current = false;
       requestIdRef.current += 1;
       stopTracks(streamRef.current);
       streamRef.current = null;
     };
-  }, [checkSupport]);
+  }, []);
 
   useEffect(() => {
     const handlePageHide = () => stop();
