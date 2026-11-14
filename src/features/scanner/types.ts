@@ -2,6 +2,12 @@
 
 import type { CameraStatus } from "@/src/types/common";
 
+export type CameraSupportStatus =
+  | "checking"
+  | "supported"
+  | "unsupported"
+  | "denied";
+
 export interface CameraState {
   status: CameraStatus;
   stream: MediaStream | null;
@@ -14,6 +20,8 @@ export interface UseCameraReturn {
   errorMessage: string | null;
   start: () => Promise<void>;
   stop: () => void;
+  supportStatus: CameraSupportStatus;
+  checkSupport: () => Promise<CameraSupportStatus>;
 }
 
 export interface UseImageUploadReturn {

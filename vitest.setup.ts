@@ -41,3 +41,7 @@ if (typeof globalThis.ImageData === "undefined") {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).ImageData = ImageDataPolyfill;
 }
+
+// Configure React act environment for tests using react/act
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(globalThis as any).IS_REACT_ACT_ENVIRONMENT = true;

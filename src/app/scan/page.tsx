@@ -34,7 +34,6 @@ import { LoadingState } from "@/src/components/feedback/LoadingState";
 import { Alert } from "@/src/components/ui/Alert";
 
 type PageMode = "camera" | "upload";
-type CameraSupport = "checking" | "supported" | "unsupported";
 
 export default function ScanPage() {
   const router = useRouter();
@@ -50,16 +49,7 @@ export default function ScanPage() {
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [analysisDone, setAnalysisDone] = useState(false);
-  const [cameraSupport, setCameraSupport] = useState<CameraSupport>("checking");
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const supported = !!navigator.mediaDevices?.getUserMedia;
-      setCameraSupport(supported ? "supported" : "unsupported");
-    }, 0);
-
-    return () => window.clearTimeout(timer);
-  }, []);
+  const cameraSupport = camera.supportStatus;
 
   // ── Attach stream to video element ────────────────────────
   useEffect(() => {
@@ -274,7 +264,8 @@ export default function ScanPage() {
     setCaptureState("live");
     setCapturedDataUrl(null);
     setError(null);
-  }, [upload]);
+    void camera.checkSupport();
+  }, [camera, upload]);
 
   // ── Trigger file input ─────────────────────────────────────
   const handleUploadClick = useCallback(() => {
@@ -343,9 +334,13 @@ export default function ScanPage() {
               {mode === "camera"
                 ? cameraSupport === "checking"
                   ? "Memeriksa dukungan kamera…"
-                  : camera.status === "requesting"
-                    ? "Meminta izin kamera…"
-                    : "Klik tombol kamera di bawah untuk memulai."
+                  : cameraSupport === "denied" || camera.status === "permission-denied"
+                    ? "Akses kamera ditolak. Izinkan akses di pengaturan browser atau gunakan unggah foto."
+                    : cameraSupport === "unsupported" || camera.status === "not-supported"
+                      ? "Browser tidak mendukung akses kamera. Gunakan browser modern atau unggah foto."
+                      : camera.status === "requesting"
+                        ? "Meminta izin kamera…"
+                        : "Klik tombol kamera di bawah untuk memulai."
                 : "Pilih file gambar untuk diunggah."}
             </p>
           </div>
@@ -397,54 +392,78 @@ export default function ScanPage() {
 
       {/* ── Camera error states ──────────────────────────────── */}
       {mode === "camera" &&
-        cameraSupport === "unsupported" &&
+        (cameraSupport === "unsupported" || camera.status === "not-supported") &&
         captureState !== "processing" && (
           <UnsupportedState onUploadClick={handleSwitchToUpload} />
         )}
 
       {mode === "camera" &&
-        cameraSupport === "supported" &&
-        (camera.status === "permission-denied" ||
-          camera.status === "not-supported" ||
+        cameraSupport !== "unsupported" &&
+        camera.status !== "not-supported" &&
+        (cameraSupport === "denied" ||
+          camera.status === "permission-denied" ||
           camera.status === "device-not-found" ||
           camera.status === "error") &&
         captureState !== "processing" && (
           <CameraPermissionState
-            status={camera.status}
+            status={
+              camera.status === "permission-denied" || cameraSupport === "denied"
+                ? "permission-denied"
+                : camera.status
+            }
             description={camera.errorMessage ?? undefined}
             onUploadClick={handleSwitchToUpload}
+            onRetry={handleStartCamera}
           />
         )}
 
       {/* ── Controls ─────────────────────────────────────────── */}
-      {captureState === "live" && mode === "camera" && cameraSupport === "supported" && (
-        <div className="flex flex-col items-center gap-4">
-          {camera.status === "active" ? (
-            /* Capture button */
+      {captureState === "live" &&
+        mode === "camera" &&
+        cameraSupport === "supported" &&
+        camera.status !== "permission-denied" &&
+        camera.status !== "not-supported" && (
+          <div className="flex flex-col items-center gap-4">
+            {camera.status === "active" ? (
+              /* Capture button */
+              <button
+                type="button"
+                onClick={handleCapture}
+                className="camera-shutter"
+                aria-label="Ambil foto"
+                style={{ minWidth: 66, minHeight: 66 }}
+              >
+                <span className="block h-full w-full rounded-full bg-accent-500" />
+              </button>
+            ) : (
+              /* Start camera button */
+              <button
+                type="button"
+                onClick={handleStartCamera}
+                disabled={camera.status === "requesting"}
+                className="scanner-primary"
+                style={{ minHeight: 44 }}
+              >
+                <CameraIcon size={20} />
+                {camera.status === "requesting" ? "Meminta Izin…" : "Aktifkan Kamera"}
+              </button>
+            )}
+
+            {/* Switch to upload */}
             <button
               type="button"
-              onClick={handleCapture}
-              className="camera-shutter"
-              aria-label="Ambil foto"
-              style={{ minWidth: 66, minHeight: 66 }}
-            >
-              <span className="block h-full w-full rounded-full bg-accent-500" />
-            </button>
-          ) : (
-            /* Start camera button */
-            <button
-              type="button"
-              onClick={handleStartCamera}
-              disabled={camera.status === "requesting"}
-              className="scanner-primary"
+              onClick={handleSwitchToUpload}
+              className="scanner-tertiary"
               style={{ minHeight: 44 }}
             >
-              <CameraIcon size={20} />
-              {camera.status === "requesting" ? "Meminta Izin…" : "Aktifkan Kamera"}
+              atau unggah foto dari galeri
             </button>
-          )}
+          </div>
+        )}
 
-          {/* Switch to upload */}
+      {/* Checking state: provide escape hatch so user is never trapped */}
+      {captureState === "live" && mode === "camera" && cameraSupport === "checking" && (
+        <div className="flex flex-col items-center gap-4">
           <button
             type="button"
             onClick={handleSwitchToUpload}
