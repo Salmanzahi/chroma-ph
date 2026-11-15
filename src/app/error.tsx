@@ -28,8 +28,8 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
           <button type="button" className="button-primary" onClick={reset}>
             Coba lagi
           </button>
-          <Link href={ROUTES.home} className="text-link">
-            Kembali ke Beranda
+          <Link href={ROUTES.scan} className="text-link">
+            Kembali ke Menu Pindai
           </Link>
         </div>
       </div>

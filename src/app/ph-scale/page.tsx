@@ -9,14 +9,14 @@ export default function PhScalePage() {
   return (
     <div className="reference-page page-shell">
       <header className="reference-page__header">
-        <p className="editorial-kicker">Referensi teknis</p>
+        <p className="editorial-kicker">Referensi</p>
         <h1>Skala pH yang digunakan</h1>
-        <p>Empat belas warna berikut berasal dari tabel sementara dalam prototipe. Nilainya ditampilkan tanpa klaim validasi laboratorium.</p>
+        <p>Skalah pH didasari pada perubahan warna saat di tetesi ekstrak kubis ungu</p>
       </header>
 
-      <Alert variant="warning" className="reference-page__alert">
+      {/* <Alert variant="warning" className="reference-page__alert">
         Dataset ini belum final. Jangan menggunakannya sebagai pengganti instrumen atau prosedur laboratorium.
-      </Alert>
+      </Alert> */}
 
       <div className="scale-overview" aria-hidden="true">
         {references.map((item) => <span key={item.ph} style={{ backgroundColor: item.hexColor }} />)}
@@ -37,7 +37,6 @@ export default function PhScalePage() {
         ))}
       </div>
 
-      <p className="reference-page__footnote">Setiap baris tetap ditandai sebagai data sementara di modul sumber.</p>
     </div>
   );
 }

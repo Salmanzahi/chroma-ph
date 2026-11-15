@@ -138,3 +138,72 @@ export const InfoIcon = createIcon(
     <line x1="12" y1="8" x2="12.01" y2="8" />
   </>
 );
+
+export const HistoryIcon = createIcon(
+  "HistoryIcon",
+  <>
+    <circle cx="12" cy="12" r="10" />
+    <polyline points="12 6 12 12 16 14" />
+  </>
+);
+
+export const SaveIcon = createIcon(
+  "SaveIcon",
+  <>
+    <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" />
+    <polyline points="17 21 17 13 7 13 7 21" />
+    <polyline points="7 3 7 8 15 8" />
+  </>
+);
+
+export const TrashIcon = createIcon(
+  "TrashIcon",
+  <>
+    <polyline points="3 6 5 6 21 6" />
+    <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" />
+    <line x1="10" y1="11" x2="10" y2="17" />
+    <line x1="14" y1="11" x2="14" y2="17" />
+  </>
+);
+
+export const EditIcon = createIcon(
+  "EditIcon",
+  <>
+    <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" />
+    <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" />
+  </>
+);
+
+export const BarChartIcon = createIcon(
+  "BarChartIcon",
+  <>
+    <line x1="18" y1="20" x2="18" y2="10" />
+    <line x1="12" y1="20" x2="12" y2="4" />
+    <line x1="6" y1="20" x2="6" y2="14" />
+  </>
+);
+
+export const LineChartIcon = createIcon(
+  "LineChartIcon",
+  <>
+    <path d="M3 3v18h18" />
+    <path d="M18 9l-5 5-4-4-6 6" />
+  </>
+);
+
+export const DatabaseIcon = createIcon(
+  "DatabaseIcon",
+  <>
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+  </>
+);
+
+export const SearchIcon = createIcon(
+  "SearchIcon",
+  <>
+    <circle cx="11" cy="11" r="8" />
+    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+  </>
+);

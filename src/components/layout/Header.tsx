@@ -9,9 +9,8 @@ import { ROUTES } from "@/src/lib/constants";
 import { SHARED } from "@/src/data/placeholder-content";
 
 const links = [
-  { href: ROUTES.home, label: SHARED.navHome, index: "00" },
   { href: ROUTES.phScale, label: SHARED.navPhScale, index: "01" },
-  { href: ROUTES.about, label: SHARED.navAbout, index: "02" },
+  { href: ROUTES.history, label: SHARED.navHistory, index: "02" },
 ] as const;
 
 export function Header() {
@@ -29,13 +28,29 @@ export function Header() {
   return (
     <header className="site-header">
       <div className="page-shell site-header__shell">
-        <Link href={ROUTES.home} className="site-brand" aria-label={SHARED.navHome}>
-          <span className="site-brand__mark" aria-hidden="true">B / pH</span>
-          <span>Anthocyanin film scanner</span>
+        <Link href={ROUTES.home} className="site-brand" aria-label="Deteksi PH Kubis Ungu">
+          <span>ChromaPH</span>
         </Link>
         <nav className="header-nav" aria-label="Navigasi utama">
-          {links.map((link) => <Link key={link.href} href={link.href} className={cn("nav-link", pathname === link.href && "is-active")}><span>{link.index}</span>{link.label}</Link>)}
-          <Link href={ROUTES.scan} className="nav-scan"><CameraIcon size={15} /> Pindai</Link>
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn("nav-link", pathname === link.href && "is-active")}
+            >
+              <span>{link.index}</span>
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            href={ROUTES.scan}
+            className={cn(
+              "nav-scan",
+              (pathname === "/" || pathname === "/scan") && "is-active"
+            )}
+          >
+            <CameraIcon size={15} /> Pindai
+          </Link>
         </nav>
         <button type="button" className="menu-toggle" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? "Tutup menu" : "Buka menu"}>
           <span>{open ? "Tutup" : "Menu"}</span>
@@ -51,7 +66,15 @@ export function Header() {
               <ArrowRightIcon size={15} className="mobile-nav-arrow" />
             </Link>
           ))}
-          <Link href={ROUTES.scan} onClick={close} className={cn("mobile-nav-link", pathname === ROUTES.scan && "is-active")} style={{ fontWeight: 700 }}>
+          <Link
+            href={ROUTES.scan}
+            onClick={close}
+            className={cn(
+              "mobile-nav-link",
+              (pathname === "/" || pathname === "/scan") && "is-active"
+            )}
+            style={{ fontWeight: 700 }}
+          >
             <span>03</span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
               <CameraIcon size={16} />{SHARED.navScan}

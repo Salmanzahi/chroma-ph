@@ -7,8 +7,6 @@
 
 import Link from "next/link";
 import { useResultData } from "@/src/features/results/hooks/useResultData";
-import { StatusBadge } from "@/src/components/ui/StatusBadge";
-import { Alert } from "@/src/components/ui/Alert";
 import { LoadingState } from "@/src/components/feedback/LoadingState";
 import { EmptyState } from "@/src/components/feedback/EmptyState";
 import { ErrorState } from "@/src/components/feedback/ErrorState";
@@ -20,6 +18,7 @@ import {
   getPhInterpretation,
   PH_INTERPRETATION_BANDS,
 } from "@/src/features/results/utils/ph-interpretation";
+import { SaveMeasurementCard } from "@/src/features/history/components/SaveMeasurementCard";
 import type { PhCategory } from "@/src/types/common";
 
 /** Map pH to a position on the gradient strip (percentage). */
@@ -102,7 +101,7 @@ export default function ResultPage() {
     );
   }
 
-  const { estimatedPh, category, eligibilityStatus, sampledRgb, sampledHsl } =
+  const { estimatedPh, category, sampledRgb, sampledHsl } =
     result;
   const position = phToPosition(estimatedPh);
   const catStyle = CATEGORY_STYLES[category];
@@ -175,9 +174,6 @@ export default function ResultPage() {
         >
           {catStyle.label}
         </span>
-
-        {/* Eligibility */}
-        <StatusBadge status={eligibilityStatus} />
       </div>
 
       {interpretation && (
@@ -260,16 +256,11 @@ export default function ResultPage() {
         </div>
       )}
 
+      {/* ── Save to Firestore Card ────────────────────────────── */}
+      <SaveMeasurementCard result={result} className="my-8" />
+
       {/* ── Disclaimers ────────────────────────────────────────── */}
       <div className="space-y-3">
-        <Alert variant="warning">
-          <p className="font-semibold">{RESULT.researchDisclaimer}</p>
-        </Alert>
-
-        <Alert variant="info">
-          <p>{RESULT.calibrationNotice}</p>
-        </Alert>
-
         <p className="text-xs leading-relaxed text-text-muted">
           {RESULT.cameraLimitation}
         </p>
@@ -286,26 +277,11 @@ export default function ResultPage() {
           <RefreshIcon size={18} />
           {RESULT.scanAnother}
         </Link>
-        <Link
-          href={ROUTES.home}
-          className="scanner-secondary no-underline"
-          style={{ minHeight: 44 }}
-        >
-          <ArrowLeftIcon size={18} />
-          {RESULT.backToHome}
-        </Link>
       </div>
 
       {/* Hidden live region for screen readers */}
       <div className="sr-only" aria-live="polite" role="status">
-        Hasil analisis: pH {estimatedPh.toFixed(1)}. Kategori:{" "}
-        {catStyle.label}. Indikasi kelayakan berdasarkan parameter penelitian:{" "}
-        {eligibilityStatus === "eligible"
-          ? "Dalam rentang"
-          : eligibilityStatus === "outside-range"
-            ? "Di luar rentang"
-            : "Tidak diketahui"}
-        .
+        Hasil analisis: pH {estimatedPh.toFixed(1)}. Kategori: {catStyle.label}.
       </div>
     </div>
   );

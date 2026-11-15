@@ -50,8 +50,9 @@ export const STORAGE_KEY_PREVIEW = "bioplastic_ph_preview";
 // --- Routes ---
 export const ROUTES = {
   home: "/",
-  scan: "/scan",
+  scan: "/",
   result: "/result",
   phScale: "/ph-scale",
   about: "/about",
+  history: "/riwayat",
 } as const;

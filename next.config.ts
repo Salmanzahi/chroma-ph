@@ -9,6 +9,14 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // Allow ngrok tunnels and local development origins for HMR and dev assets
+  allowedDevOrigins: [
+    "*.ngrok-free.app",
+    "*.ngrok.app",
+    "*.ngrok.io",
+    "localhost:3000",
+    "127.0.0.1:3000",
+  ],
 };
 
 export default nextConfig;

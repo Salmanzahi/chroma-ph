@@ -39,3 +39,4 @@ export interface CaptureState {
   imageData: ImageData | null;
   error: string | null;
 }
+

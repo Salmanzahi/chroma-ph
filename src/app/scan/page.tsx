@@ -32,6 +32,8 @@ import { CameraPermissionState } from "@/src/components/feedback/CameraPermissio
 import { UnsupportedState } from "@/src/components/feedback/UnsupportedState";
 import { LoadingState } from "@/src/components/feedback/LoadingState";
 import { Alert } from "@/src/components/ui/Alert";
+import { SaveMeasurementModal } from "@/src/features/history/components/SaveMeasurementModal";
+import type { PhAnalysisResult } from "@/src/features/ph-analysis/types";
 
 type PageMode = "camera" | "upload";
 
@@ -48,7 +50,7 @@ export default function ScanPage() {
   const [captureState, setCaptureState] = useState<"live" | "captured" | "processing">("live");
   const [capturedDataUrl, setCapturedDataUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [analysisDone, setAnalysisDone] = useState(false);
+  const [analyzedResult, setAnalyzedResult] = useState<PhAnalysisResult | null>(null);
   const cameraSupport = camera.supportStatus;
 
   // ── Attach stream to video element ────────────────────────
@@ -71,6 +73,7 @@ export default function ScanPage() {
     setError(null);
     setCaptureState("live");
     setCapturedDataUrl(null);
+    setAnalyzedResult(null);
     upload.clearFile();
     clearStoredResult();
     await camera.start();
@@ -168,6 +171,7 @@ export default function ScanPage() {
   // ── Retake ────────────────────────────────────────────────
   const handleRetake = useCallback(() => {
     setCapturedDataUrl(null);
+    setAnalyzedResult(null);
     setCaptureState("live");
     setError(null);
     upload.clearFile();
@@ -234,19 +238,13 @@ export default function ScanPage() {
       }
 
       camera.stop();
-      setAnalysisDone(true);
+      setCaptureState("captured");
+      setAnalyzedResult(result);
     } catch {
       setError("Terjadi kesalahan saat menganalisis. Coba lagi.");
       setCaptureState("captured");
     }
   }, [camera]);
-
-  // Navigate after analysis.
-  useEffect(() => {
-    if (analysisDone) {
-      router.push(ROUTES.result);
-    }
-  }, [analysisDone, router]);
 
   // ── Switch to upload mode ─────────────────────────────────
   const handleSwitchToUpload = useCallback(() => {
@@ -285,7 +283,7 @@ export default function ScanPage() {
     <div className="scanner-page">
       {/* ── Header ─────────────────────────────────────────── */}
       <div className="scanner-heading">
-        <p className="editorial-kicker">Pemrosesan lokal di browser</p>
+
         <h1>
           {SCANNER.pageTitle}
         </h1>
@@ -550,6 +548,15 @@ export default function ScanPage() {
       <p className="scanner-disclaimer">
         {SCANNER.technicalDisclaimer}
       </p>
+
+      {/* ── Save to Firestore Modal ─────────────────────────────── */}
+      {analyzedResult && (
+        <SaveMeasurementModal
+          isOpen={!!analyzedResult}
+          result={analyzedResult}
+          onClose={() => setAnalyzedResult(null)}
+        />
+      )}
     </div>
   );
 }

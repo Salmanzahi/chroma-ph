@@ -85,10 +85,10 @@ export const PH_SCALE = {
 export const SCANNER = {
   pageTitle: "Pindai Indikator",
   instructions:
-    "Arahkan kamera ke film indikator bioplastik. Pastikan pencahayaan cukup dan merata.",
+    "",
   processingLabel: "Menganalisis warna…",
   technicalDisclaimer:
-    "Kamera, pencahayaan, dan kualitas gambar memengaruhi hasil analisis. Hasil bersifat perkiraan, bukan pengukuran laboratorium.",
+    "",
 } as const;
 
 export const RESULT = {
@@ -110,7 +110,7 @@ export const RESULT = {
 export const NOT_FOUND = {
   title: "Halaman Tidak Ditemukan",
   description: "Halaman yang Anda cari tidak tersedia.",
-  backHome: "Kembali ke Beranda",
+  backHome: "Kembali ke Menu Pindai",
 } as const;
 
 export const SHARED = {
@@ -119,6 +119,7 @@ export const SHARED = {
     "Alat pemindai pH berbasis browser untuk film indikator bioplastik antosianin bunga telang (Clitoria ternatea). Dikembangkan oleh ARGON UNAIR.",
   navScan: "Pindai",
   navPhScale: "Skala pH",
+  navHistory: "Riwayat",
   navAbout: "Tentang",
   navHome: "Beranda",
 } as const;
